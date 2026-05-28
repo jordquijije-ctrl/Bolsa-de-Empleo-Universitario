@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mi Perfil de Estudiante - Bolsa de Empleo UG (Universidad de Guayaquil).">
+    <title>Mi Perfil | Bolsa de Empleo UG</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="main-header" id="main-header" style="display: none;">
+        <div class="header-container">
+            <a href="index.html" class="logo" id="nav-logo">
+                <span class="logo-icon">UG</span>
+                <span class="logo-text">UG <span class="highlight">Empleo</span></span>
+            </a>
+            
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link" data-target="home-view"><i data-lucide="home"></i> Inicio</a></li>
+                    <li><a href="empleos.html" class="nav-link" data-target="jobs-view"><i data-lucide="briefcase"></i> Buscar Empleos</a></li>
+                    <li><a href="empresa.html" class="nav-link" data-target="employer-view" style="display: none;"><i data-lucide="building-2"></i> Empresas</a></li>
+                    <li><a href="perfil.html" class="nav-link active" data-target="profile-view"><i data-lucide="user"></i> Mi Perfil</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button id="theme-toggle" class="icon-btn" aria-label="Cambiar tema">
+                    <i data-lucide="sun" class="sun-icon"></i>
+                    <i data-lucide="moon" class="moon-icon"></i>
+                </button>
+                <div class="user-pill" id="user-profile-pill">
+                    <img src="" alt="Avatar Estudiante UG" class="avatar-sm" id="header-avatar">
+                    <span class="user-name" id="header-username">Jordy Camacho</span>
+                    <button id="logout-btn" class="logout-icon-btn" title="Cerrar Sesión"><i data-lucide="log-out"></i></button>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Menu -->
+    <div class="mobile-nav" id="mobile-nav-panel">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html" class="mobile-link" data-target="home-view"><i data-lucide="home"></i> Inicio</a></li>
+            <li><a href="empleos.html" class="mobile-link" data-target="jobs-view"><i data-lucide="briefcase"></i> Buscar Empleos</a></li>
+            <li><a href="empresa.html" class="mobile-link" data-target="employer-view" style="display: none;"><i data-lucide="building-2"></i> Empresas</a></li>
+            <li><a href="perfil.html" class="mobile-link active" data-target="profile-view"><i data-lucide="user"></i> Mi Perfil</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- ========================================================== -->
+        <!-- PROFILE VIEW (PERFIL DEL ESTUDIANTE Y MIS POSTULACIONES) -->
+        <!-- ========================================================== -->
+        <section id="profile-view" class="view-section active">
+            <div class="profile-container">
+                <!-- Columna Datos del Perfil (Izquierda) -->
+                <div class="profile-card-left">
+                    <div class="profile-banner"></div>
+                    <div class="profile-info-wrapper">
+                        <div class="profile-avatar-container">
+                            <img src="" alt="Avatar Estudiante UG" class="profile-avatar" id="profile-avatar-img">
+                        </div>
+                        <h2 class="profile-name" id="profile-card-name">Cargando...</h2>
+                        <p class="profile-degree" id="profile-card-role">Cargando...</p>
+                        <p class="profile-univ"><i data-lucide="graduation-cap"></i> Universidad de Guayaquil</p>
+                        <span class="semestre-badge" id="profile-card-sub">Cargando...</span>
+                        
+                        <div class="profile-bio" id="profile-card-bio">
+                            <p>Cargando información del estudiante...</p>
+                        </div>
+
+                        <hr class="divider">
+
+                        <div class="profile-details-list">
+                            <div class="detail-item">
+                                <i data-lucide="mail"></i>
+                                <span id="profile-card-email">jordycamacho@ug.edu.ec</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="phone"></i>
+                                <span>+593 98 765 4321</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="map-pin"></i>
+                                <span>Guayaquil, Ecuador</span>
+                            </div>
+                            <div class="detail-item" id="profile-cv-row">
+                                <i data-lucide="file-text"></i>
+                                <span class="cv-text">Jordy_Camacho_CV_UG.pdf</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-skills" id="profile-skills-block">
+                            <h3>Habilidades Clave</h3>
+                            <div class="skills-tags">
+                                <span class="skill-tag">HTML5 & CSS3</span>
+                                <span class="skill-tag">JavaScript (ES6)</span>
+                                <span class="skill-tag">React.js</span>
+                                <span class="skill-tag">Bases de Datos</span>
+                                <span class="skill-tag">Trabajo en Equipo</span>
+                                <span class="skill-tag">Inglés B2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Postulaciones y Progreso (Derecha) -->
+                <div class="profile-content-right">
+                    <div class="profile-panel-header">
+                        <h2>Mis Postulaciones Activas <span class="count-badge" id="profile-applications-count">0</span></h2>
+                        <p>Monitorea y gestiona (elimina/retira) en tiempo real tus solicitudes enviadas al sector empresarial del país.</p>
+                    </div>
+
+                    <!-- Lista de Postulaciones -->
+                    <div class="applications-timeline" id="student-applications-list">
+                        <div class="empty-applications">
+                            <i data-lucide="inbox"></i>
+                            <p>Aún no te has postulado a ninguna vacante académica de la UG.</p>
+                            <a href="empleos.html" class="btn btn-primary">Buscar Empleos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sistema de Notificaciones Flotantes (Toasts) -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Pie de página (Footer) -->
+    <footer class="main-footer" id="main-footer" style="display: none;">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">UG</span>
+                    <span class="logo-text">UG <span class="highlight">Empleo</span></span>
+                </a>
+                <p>La plataforma interactiva de vinculación con la colectividad oficial de la Universidad de Guayaquil. Impulsando el futuro laboral del Ecuador.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" class="social-icon"><i data-lucide="facebook"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon"><i data-lucide="twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon"><i data-lucide="instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="social-icon"><i data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-col">
+                    <h4>Para Estudiantes</h4>
+                    <ul>
+                        <li><a href="empleos.html" class="footer-nav-link" data-target="jobs-view">Buscador de Empleo</a></li>
+                        <li><a href="perfil.html" class="footer-nav-link" data-target="profile-view">Mi Cuenta / Perfil</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Para Empleadores</h4>
+                    <ul>
+                        <li><a href="empresa.html" class="footer-nav-link" data-target="employer-view">Crear Vacantes</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Universidad de Guayaquil. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts por Capas (MVC) -->
+    <script src="js/initial_data.js"></script>
+    <script src="js/models/UGEmpleoModel.js"></script>
+    <script src="js/views/HeaderFooterView.js"></script>
+    <script src="js/views/PerfilView.js"></script>
+    <script src="js/controllers/PerfilController.js"></script>
+    <script src="js/pages/perfil_app.js"></script>
+</body>
+</html>

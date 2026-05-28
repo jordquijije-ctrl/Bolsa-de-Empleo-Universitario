@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal de Reclutamiento - Bolsa de Empleo UG (Universidad de Guayaquil).">
+    <title>Portal de Reclutamiento | Bolsa de Empleo UG</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="main-header" id="main-header" style="display: none;">
+        <div class="header-container">
+            <a href="index.html" class="logo" id="nav-logo">
+                <span class="logo-icon">UG</span>
+                <span class="logo-text">UG <span class="highlight">Empleo</span></span>
+            </a>
+            
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link" data-target="home-view"><i data-lucide="home"></i> Inicio</a></li>
+                    <li><a href="empleos.html" class="nav-link" data-target="jobs-view"><i data-lucide="briefcase"></i> Buscar Empleos</a></li>
+                    <li><a href="empresa.html" class="nav-link active" data-target="employer-view"><i data-lucide="building-2"></i> Empresas</a></li>
+                    <li><a href="perfil.html" class="nav-link" data-target="profile-view" style="display: none;"><i data-lucide="user"></i> Mi Perfil</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button id="theme-toggle" class="icon-btn" aria-label="Cambiar tema">
+                    <i data-lucide="sun" class="sun-icon"></i>
+                    <i data-lucide="moon" class="moon-icon"></i>
+                </button>
+                <div class="user-pill" id="user-profile-pill">
+                    <img src="" alt="Avatar" class="avatar-sm" id="header-avatar">
+                    <span class="user-name" id="header-username">Telconet Latam</span>
+                    <button id="logout-btn" class="logout-icon-btn" title="Cerrar Sesión"><i data-lucide="log-out"></i></button>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Menu -->
+    <div class="mobile-nav" id="mobile-nav-panel">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html" class="mobile-link" data-target="home-view"><i data-lucide="home"></i> Inicio</a></li>
+            <li><a href="empleos.html" class="mobile-link" data-target="jobs-view"><i data-lucide="briefcase"></i> Buscar Empleos</a></li>
+            <li><a href="empresa.html" class="mobile-link active" data-target="employer-view"><i data-lucide="building-2"></i> Empresas</a></li>
+            <li><a href="perfil.html" class="mobile-link" data-target="profile-view" style="display: none;"><i data-lucide="user"></i> Mi Perfil</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- ========================================================== -->
+        <!-- EMPLOYER VIEW (EMPRESAS / PORTAL DE PUBLICACIÓN) -->
+        <!-- ========================================================== -->
+        <section id="employer-view" class="view-section active">
+            <div class="employer-header">
+                <div>
+                    <span class="section-tag"><i data-lucide="building-2"></i> Portal del Empleador UG</span>
+                    <h2>Gestión Completa de <span class="gradient-text">Vacantes Académicas (CRUD)</span></h2>
+                    <p>Administra en tiempo real los procesos de contratación exclusivos para la comunidad estudiantil de la Universidad de Guayaquil.</p>
+                </div>
+                <button class="btn btn-primary" id="open-post-job-btn"><i data-lucide="plus"></i> Crear Nueva Oferta</button>
+            </div>
+
+            <!-- Employer Metrics Card -->
+            <div class="employer-metrics-row">
+                <div class="metric-card">
+                    <div class="metric-icon bg-soft-primary"><i data-lucide="files"></i></div>
+                    <div>
+                        <h3>0</h3>
+                        <p>Ofertas Creadas (C)</p>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon bg-soft-success"><i data-lucide="users-2"></i></div>
+                    <div>
+                        <h3>0</h3>
+                        <p>Candidatos Leídos (R)</p>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon bg-soft-warning"><i data-lucide="edit-3"></i></div>
+                    <div>
+                        <h3>Operaciones CRUD</h3>
+                        <p>Crear, Leer, Editar, Eliminar</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tablas de Ofertas Publicadas -->
+            <div class="posted-jobs-section">
+                <div class="posted-jobs-header">
+                    <h3>Panel de Control CRUD de Ofertas</h3>
+                    <span class="active-badge">Empresa Regulada: <strong id="employer-company-badge">Cargando...</strong></span>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="jobs-table">
+                        <thead>
+                            <tr>
+                                <th>Cargo</th>
+                                <th>Tipo</th>
+                                <th>Ubicación</th>
+                                <th>Postulantes (R)</th>
+                                <th>Salario</th>
+                                <th>Operaciones (U/D)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employer-jobs-tbody">
+                            <!-- Se renderiza desde JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Modal para Crear / Editar empleo -->
+            <div class="modal-overlay" id="post-job-modal">
+                <div class="modal-container">
+                    <div class="modal-header">
+                        <h3 id="modal-job-title-action"><i data-lucide="plus-circle"></i> Crear Nueva Vacante</h3>
+                        <button class="close-modal-btn" id="close-post-job-modal"><i data-lucide="x"></i></button>
+                    </div>
+                    <form id="post-job-form" class="modal-form">
+                        <!-- ID Oculto para la operación Update (U) -->
+                        <input type="hidden" id="job-edit-id">
+                        
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="job-title" class="required">Título de la Vacante</label>
+                                <input type="text" id="job-title" placeholder="Ej: Desarrollador Frontend Junior, Practicante de Sistemas" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="job-company" class="required">Empresa Empleadora</label>
+                                <input type="text" id="job-company" value="" required readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="job-category" class="required">Área Profesional</label>
+                                <select id="job-category" required>
+                                    <option value="Tecnología">Sistemas y Tecnología</option>
+                                    <option value="Diseño">Diseño y Multimedia</option>
+                                    <option value="Administración">Administración y Negocios</option>
+                                    <option value="Ingeniería">Ingeniería y Ciencias</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="job-type-post" class="required">Tipo de Contrato</label>
+                                <select id="job-type-post" required>
+                                    <option value="Tiempo Completo">Tiempo Completo</option>
+                                    <option value="Medio Tiempo">Medio Tiempo</option>
+                                    <option value="Prácticas">Prácticas Académicas</option>
+                                    <option value="Remoto">100% Teletrabajo</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="job-experience-post" class="required">Experiencia Requerida</label>
+                                <select id="job-experience-post" required>
+                                    <option value="Sin Experiencia">Sin Experiencia previa</option>
+                                    <option value="Junior">Junior (0-1 años)</option>
+                                    <option value="Intermedio">Intermedio / Mid</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="job-location" class="required">Ubicación</label>
+                                <input type="text" id="job-location" placeholder="Ej: Guayaquil, Quito o Teletrabajo" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="job-salary">Salario Estimado (Mensual USD)</label>
+                                <input type="text" id="job-salary" placeholder="Ej: $800, $500 o A convenir">
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="job-desc" class="required">Descripción General</label>
+                                <textarea id="job-desc" rows="4" placeholder="Detalla los objetivos del rol, la cultura empresarial y el equipo..." required></textarea>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="job-req" class="required">Requisitos Clave (Separados por comas)</label>
+                                <input type="text" id="job-req" placeholder="Ej: Estudiante de Sistemas UG, Conocimientos básicos de Java, Proactivo" required>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="job-benefits">Beneficios (Separados por comas)</label>
+                                <input type="text" id="job-benefits" placeholder="Ej: Horario adaptable para clases, Mentoría profesional, Computadora corporativa">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary-outline" id="cancel-post-btn">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" id="submit-post-btn">Guardar Vacante</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Modal de Confirmación de Eliminación (Delete CRUD) -->
+            <div class="modal-overlay" id="delete-confirm-modal">
+                <div class="modal-container modal-sm">
+                    <div class="modal-header">
+                        <h3><i data-lucide="trash-2" style="color:var(--danger);"></i> ¿Eliminar Oferta?</h3>
+                        <button class="close-modal-btn" id="close-delete-modal"><i data-lucide="x"></i></button>
+                    </div>
+                    <div class="modal-form" style="padding: 20px 24px; text-align: center;">
+                        <p style="margin-bottom: 20px;">Esta acción eliminará de forma permanente esta oferta laboral del buscador de la Universidad de Guayaquil. Esta operación no se puede deshacer.</p>
+                        <input type="hidden" id="delete-job-id">
+                        <div style="display:flex; gap:12px; justify-content:center;">
+                            <button class="btn btn-secondary-outline" id="cancel-delete-btn">Cancelar</button>
+                            <button class="btn btn-primary" id="confirm-delete-btn" style="background:var(--danger); box-shadow:none;">Eliminar Definitivamente</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drawer de Candidatos (Cajón deslizable de Lucide) -->
+            <div class="job-detail-drawer" id="job-detail-drawer">
+                <button class="close-drawer-btn" id="close-drawer-btn"><i data-lucide="x"></i></button>
+                <div class="drawer-content" id="drawer-content-body">
+                    <!-- Se carga dinámicamente con JS -->
+                </div>
+            </div>
+            <!-- Fondo oscuro detrás del Drawer -->
+            <div class="drawer-overlay" id="drawer-overlay"></div>
+        </section>
+    </main>
+
+    <!-- Sistema de Notificaciones Flotantes (Toasts) -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Pie de página (Footer) -->
+    <footer class="main-footer" id="main-footer" style="display: none;">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">UG</span>
+                    <span class="logo-text">UG <span class="highlight">Empleo</span></span>
+                </a>
+                <p>La plataforma interactiva de vinculación con la colectividad oficial de la Universidad de Guayaquil. Impulsando el futuro laboral del Ecuador.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" class="social-icon"><i data-lucide="facebook"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon"><i data-lucide="twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon"><i data-lucide="instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="social-icon"><i data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-col">
+                    <h4>Para Estudiantes</h4>
+                    <ul>
+                        <li><a href="empleos.html" class="footer-nav-link" data-target="jobs-view">Buscador de Empleo</a></li>
+                        <li><a href="perfil.html" class="footer-nav-link" data-target="profile-view">Mi Cuenta / Perfil</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Para Empleadores</h4>
+                    <ul>
+                        <li><a href="empresa.html" class="footer-nav-link" data-target="employer-view">Crear Vacantes</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Universidad de Guayaquil. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts por Capas (MVC) -->
+    <script src="js/initial_data.js"></script>
+    <script src="js/models/UGEmpleoModel.js"></script>
+    <script src="js/views/HeaderFooterView.js"></script>
+    <script src="js/views/EmpresaView.js"></script>
+    <script src="js/controllers/EmpresaController.js"></script>
+    <script src="js/pages/empresa_app.js"></script>
+</body>
+</html>

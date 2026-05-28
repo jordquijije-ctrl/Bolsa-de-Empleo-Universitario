@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bolsa de Empleo UG - Universidad de Guayaquil. Conectando estudiantes, egresados y el sector empresarial del Ecuador.">
+    <title>Bolsa de Empleo UG | Universidad de Guayaquil</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="main-header" id="main-header" style="display: none;">
+        <div class="header-container">
+            <a href="index.html" class="logo" id="nav-logo">
+                <span class="logo-icon">UG</span>
+                <span class="logo-text">UG <span class="highlight">Empleo</span></span>
+            </a>
+            
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link active" data-target="home-view"><i data-lucide="home"></i> Inicio</a></li>
+                    <li><a href="empleos.html" class="nav-link" data-target="jobs-view"><i data-lucide="briefcase"></i> Buscar Empleos</a></li>
+                    <li><a href="empresa.html" class="nav-link" data-target="employer-view" style="display: none;"><i data-lucide="building-2"></i> Empresas</a></li>
+                    <li><a href="perfil.html" class="nav-link" data-target="profile-view"><i data-lucide="user"></i> Mi Perfil</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button id="theme-toggle" class="icon-btn" aria-label="Cambiar tema">
+                    <i data-lucide="sun" class="sun-icon"></i>
+                    <i data-lucide="moon" class="moon-icon"></i>
+                </button>
+                <div class="user-pill" id="user-profile-pill">
+                    <img src="" alt="Avatar Estudiante UG" class="avatar-sm" id="header-avatar">
+                    <span class="user-name" id="header-username">Jordy Camacho</span>
+                    <button id="logout-btn" class="logout-icon-btn" title="Cerrar Sesión"><i data-lucide="log-out"></i></button>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Menu -->
+    <div class="mobile-nav" id="mobile-nav-panel">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html" class="mobile-link active" data-target="home-view"><i data-lucide="home"></i> Inicio</a></li>
+            <li><a href="empleos.html" class="mobile-link" data-target="jobs-view"><i data-lucide="briefcase"></i> Buscar Empleos</a></li>
+            <li><a href="empresa.html" class="mobile-link" data-target="employer-view" style="display: none;"><i data-lucide="building-2"></i> Empresas</a></li>
+            <li><a href="perfil.html" class="mobile-link" data-target="profile-view"><i data-lucide="user"></i> Mi Perfil</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- ========================================================== -->
+        <!-- HOME VIEW (INICIO) -->
+        <!-- ========================================================== -->
+        <section id="home-view" class="view-section active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <span class="hero-badge"><i data-lucide="sparkles"></i> La más grande, importante y gloriosa del Ecuador</span>
+                    <h1 class="hero-title">Conecta tu talento <span class="gradient-text">Universidad de Guayaquil</span> con grandes empresas</h1>
+                    <p class="hero-subtitle">El portal oficial de empleo y prácticas pre-profesionales para estudiantes y graduados de la UG en todo el Ecuador.</p>
+                    
+                    <!-- Search Bar Home -->
+                    <div class="search-bar-container">
+                        <form id="hero-search-form" class="hero-search-form">
+                            <div class="search-input-group">
+                                <i data-lucide="search" class="input-icon"></i>
+                                <input type="text" id="hero-search-input" placeholder="¿Qué puesto buscas? (Ej: Frontend, Pasantía, Sistemas)">
+                            </div>
+                            <div class="search-input-group select-group">
+                                <i data-lucide="map-pin" class="input-icon"></i>
+                                <select id="hero-location-select">
+                                    <option value="">Ubicación</option>
+                                    <option value="remoto">100% Teletrabajo</option>
+                                    <option value="guayaquil">Guayaquil</option>
+                                    <option value="quito">Quito</option>
+                                    <option value="cuenca">Cuenca</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i data-lucide="search"></i> Buscar</button>
+                        </form>
+                    </div>
+
+                    <!-- Pop Tags -->
+                    <div class="popular-tags">
+                        <span class="tags-label">Búsquedas populares:</span>
+                        <button class="tag-btn" data-search="Prácticas">Prácticas Pre-Profesionales</button>
+                        <button class="tag-btn" data-search="Junior">Desarrollador Junior</button>
+                        <button class="tag-btn" data-search="Administración">Administración</button>
+                        <button class="tag-btn" data-search="Diseño">Diseño Web</button>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="visual-blob-bg"></div>
+                    <div class="floating-card c1">
+                        <div class="icon-circle text-success"><i data-lucide="check-circle-2"></i></div>
+                        <div>
+                            <h4>¡Postulación Aceptada!</h4>
+                            <p>Banco Pichincha hace 2 min</p>
+                        </div>
+                    </div>
+                    <div class="floating-card c2">
+                        <div class="icon-circle text-primary"><i data-lucide="briefcase"></i></div>
+                        <div>
+                            <h4>+850 Vacantes</h4>
+                            <p>Especiales para la UG</p>
+                        </div>
+                    </div>
+                    <div class="floating-card c3">
+                        <div class="icon-circle text-warning"><i data-lucide="star"></i></div>
+                        <div>
+                            <h4>Empresas Top</h4>
+                            <p>Cervecería Nacional, Telconet...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-num" data-val="850">850+</div>
+                    <div class="stat-label">Vacantes Activas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num" data-val="180">180+</div>
+                    <div class="stat-label">Empresas en Convenio</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num" data-val="92">92%</div>
+                    <div class="stat-label">Graduados Satisfechos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num" data-val="8200">8,200+</div>
+                    <div class="stat-label">Estudiantes Registrados</div>
+                </div>
+            </section>
+
+            <!-- Dual CTA Section -->
+            <section class="dual-cta-section">
+                <div class="cta-card student-cta">
+                    <div class="cta-overlay"></div>
+                    <div class="cta-content">
+                        <span class="cta-tag">Estudiantes y Graduados UG</span>
+                        <h3>Despega tu carrera profesional</h3>
+                        <p>Aplica a prácticas pre-profesionales, pasantías y empleos de tiempo completo alineados con tu perfil académico de la UG.</p>
+                        <a href="empleos.html" class="btn btn-white-blur">Explorar Ofertas <i data-lucide="arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="cta-card employer-cta">
+                    <div class="cta-overlay"></div>
+                    <div class="cta-content">
+                        <span class="cta-tag">Portal para Empleadores</span>
+                        <h3>Capta el talento más brillante de la UG</h3>
+                        <p>Publica tus requerimientos de talento, gestiona tus vacantes y contacta directamente a la mayor comunidad universitaria del país.</p>
+                        <a href="empresa.html" class="btn btn-primary">Publicar / Gestionar <i data-lucide="plus"></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Categories -->
+            <section class="categories-section">
+                <div class="section-header">
+                    <h2>Explora por <span class="gradient-text">Áreas Profesionales</span></h2>
+                    <p>Encuentra oportunidades de desarrollo laboral según tu facultad o carrera en la Universidad de Guayaquil.</p>
+                </div>
+                <div class="categories-grid">
+                    <div class="category-card" data-category="Tecnología">
+                        <div class="category-icon tech"><i data-lucide="code-2"></i></div>
+                        <h3>Sistemas y Tecnología</h3>
+                        <p>Desarrollo Web, Soporte de TI, Redes, Ciberseguridad</p>
+                        <span class="category-count">248 vacantes</span>
+                    </div>
+                    <div class="category-card" data-category="Diseño">
+                        <div class="category-icon design"><i data-lucide="palette"></i></div>
+                        <h3>Diseño y Multimedia</h3>
+                        <p>Diseño UX/UI, Diseño Publicitario, Animación, Contenidos</p>
+                        <span class="category-count">112 vacantes</span>
+                    </div>
+                    <div class="category-card" data-category="Administración">
+                        <div class="category-icon business"><i data-lucide="trending-up"></i></div>
+                        <h3>Administración y Negocios</h3>
+                        <p>Contabilidad, Marketing, Recursos Humanos, Finanzas</p>
+                        <span class="category-count">310 vacantes</span>
+                    </div>
+                    <div class="category-card" data-category="Ingeniería">
+                        <div class="category-icon engineering"><i data-lucide="cpu"></i></div>
+                        <h3>Ingeniería y Ciencias</h3>
+                        <p>Ingeniería Civil, Industrial, Mecatrónica, Química</p>
+                        <span class="category-count">180 vacantes</span>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- Sistema de Notificaciones Flotantes (Toasts) -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Pie de página (Footer) -->
+    <footer class="main-footer" id="main-footer" style="display: none;">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">UG</span>
+                    <span class="logo-text">UG <span class="highlight">Empleo</span></span>
+                </a>
+                <p>La plataforma interactiva de vinculación con la colectividad oficial de la Universidad de Guayaquil. Impulsando el futuro laboral del Ecuador.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" class="social-icon"><i data-lucide="facebook"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon"><i data-lucide="twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon"><i data-lucide="instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="social-icon"><i data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-col">
+                    <h4>Para Estudiantes</h4>
+                    <ul>
+                        <li><a href="empleos.html" class="footer-nav-link" data-target="jobs-view">Buscador de Empleo</a></li>
+                        <li><a href="perfil.html" class="footer-nav-link" data-target="profile-view">Mi Cuenta / Perfil</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Para Empleadores</h4>
+                    <ul>
+                        <li><a href="empresa.html" class="footer-nav-link" data-target="employer-view">Crear Vacantes</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Universidad de Guayaquil. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts por Capas (MVC) -->
+    <script src="js/initial_data.js"></script>
+    <script src="js/models/UGEmpleoModel.js"></script>
+    <script src="js/views/HeaderFooterView.js"></script>
+    <script src="js/views/InicioView.js"></script>
+    <script src="js/controllers/InicioController.js"></script>
+    <script src="js/pages/inicio_app.js"></script>
+</body>
+</html>

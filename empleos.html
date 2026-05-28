@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buscador de Empleos y Prácticas - Bolsa de Empleo UG (Universidad de Guayaquil).">
+    <title>Buscar Empleos | Bolsa de Empleo UG</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="main-header" id="main-header" style="display: none;">
+        <div class="header-container">
+            <a href="index.html" class="logo" id="nav-logo">
+                <span class="logo-icon">UG</span>
+                <span class="logo-text">UG <span class="highlight">Empleo</span></span>
+            </a>
+            
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link" data-target="home-view"><i data-lucide="home"></i> Inicio</a></li>
+                    <li><a href="empleos.html" class="nav-link active" data-target="jobs-view"><i data-lucide="briefcase"></i> Buscar Empleos</a></li>
+                    <li><a href="empresa.html" class="nav-link" data-target="employer-view" style="display: none;"><i data-lucide="building-2"></i> Empresas</a></li>
+                    <li><a href="perfil.html" class="nav-link" data-target="profile-view"><i data-lucide="user"></i> Mi Perfil</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button id="theme-toggle" class="icon-btn" aria-label="Cambiar tema">
+                    <i data-lucide="sun" class="sun-icon"></i>
+                    <i data-lucide="moon" class="moon-icon"></i>
+                </button>
+                <div class="user-pill" id="user-profile-pill">
+                    <img src="" alt="Avatar Estudiante UG" class="avatar-sm" id="header-avatar">
+                    <span class="user-name" id="header-username">Jordy Camacho</span>
+                    <button id="logout-btn" class="logout-icon-btn" title="Cerrar Sesión"><i data-lucide="log-out"></i></button>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Menu -->
+    <div class="mobile-nav" id="mobile-nav-panel">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html" class="mobile-link" data-target="home-view"><i data-lucide="home"></i> Inicio</a></li>
+            <li><a href="empleos.html" class="mobile-link active" data-target="jobs-view"><i data-lucide="briefcase"></i> Buscar Empleos</a></li>
+            <li><a href="empresa.html" class="mobile-link" data-target="employer-view" style="display: none;"><i data-lucide="building-2"></i> Empresas</a></li>
+            <li><a href="perfil.html" class="mobile-link" data-target="profile-view"><i data-lucide="user"></i> Mi Perfil</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- ========================================================== -->
+        <!-- BUSCADOR DE EMPLEOS -->
+        <!-- ========================================================== -->
+        <section id="jobs-view" class="view-section active">
+            <div class="jobs-layout-container">
+                <!-- Sidebar Filtros -->
+                <aside class="filters-sidebar">
+                    <div class="sidebar-header">
+                        <h3><i data-lucide="sliders-horizontal"></i> Filtros de Búsqueda</h3>
+                        <button id="clear-filters-btn" class="text-btn">Limpiar</button>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Buscar por palabra clave</label>
+                        <div class="search-input-wrapper">
+                            <i data-lucide="search" class="search-icon"></i>
+                            <input type="text" id="jobs-search-input" placeholder="Ej: React, Pasantía...">
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Categoría Académica</label>
+                        <select id="filter-category" class="filter-select">
+                            <option value="">Todas las áreas</option>
+                            <option value="Tecnología">Sistemas y Tecnología</option>
+                            <option value="Diseño">Diseño y Multimedia</option>
+                            <option value="Administración">Administración y Negocios</option>
+                            <option value="Ingeniería">Ingeniería y Ciencias</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Tipo de Contrato</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="job-type" value="Tiempo Completo">
+                                <span class="checkmark"></span> Tiempo Completo
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="job-type" value="Medio Tiempo">
+                                <span class="checkmark"></span> Medio Tiempo
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="job-type" value="Prácticas">
+                                <span class="checkmark"></span> Prácticas Académicas
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="job-type" value="Remoto">
+                                <span class="checkmark"></span> 100% Teletrabajo
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">Nivel de Experiencia</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="experience-level" value="Sin Experiencia">
+                                <span class="checkmark"></span> Sin Experiencia previa
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="experience-level" value="Junior">
+                                <span class="checkmark"></span> Junior (0-1 años)
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="experience-level" value="Intermedio">
+                                <span class="checkmark"></span> Intermedio / Mid
+                            </label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Listado de Ofertas -->
+                <div class="jobs-main-content">
+                    <div class="jobs-results-header">
+                        <h2>Ofertas Disponibles <span class="count-badge" id="jobs-count">0</span></h2>
+                        <div class="sorting-wrapper">
+                            <label for="sort-select">Ordenar por:</label>
+                            <select id="sort-select" class="sort-select">
+                                <option value="recent">Más recientes</option>
+                                <option value="salary-high">Mayor Salario</option>
+                                <option value="salary-low">Menor Salario</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Tarjetas de Empleo Grid/List -->
+                    <div class="jobs-list-grid" id="jobs-list-container">
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Buscando ofertas de la UG...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drawer / Panel Lateral de Detalles (Se desliza desde la derecha) -->
+            <div class="job-detail-drawer" id="job-detail-drawer">
+                <button class="close-drawer-btn" id="close-drawer-btn"><i data-lucide="x"></i></button>
+                <div class="drawer-content" id="drawer-content-body">
+                    <!-- Se carga dinámicamente con JS -->
+                </div>
+            </div>
+            <!-- Fondo oscuro detrás del Drawer -->
+            <div class="drawer-overlay" id="drawer-overlay"></div>
+        </section>
+    </main>
+
+    <!-- Modal de Postulación de Estudiante -->
+    <div class="modal-overlay" id="apply-job-modal">
+        <div class="modal-container modal-sm">
+            <div class="modal-header">
+                <h3><i data-lucide="send"></i> Enviar Postulación</h3>
+                <button class="close-modal-btn" id="close-apply-job-modal"><i data-lucide="x"></i></button>
+            </div>
+            <form id="apply-job-form" class="modal-form">
+                <input type="hidden" id="apply-job-id">
+                
+                <div class="apply-job-preview-card" id="apply-job-preview">
+                    <!-- Detalle breve dinámico -->
+                </div>
+
+                <div class="form-group">
+                    <label class="required">Hoja de Vida Académica (CV)</label>
+                    <div class="cv-upload-area" id="cv-drop-zone">
+                        <i data-lucide="cloud-upload" class="upload-icon"></i>
+                        <p><strong id="apply-cv-label">Jordy_Camacho_CV_UG.pdf</strong> ya está pre-cargado de tu perfil.</p>
+                        <span class="sub-text">Haz clic aquí para cambiar o subir tu CV en formato PDF (Máx. 5MB)</span>
+                        <input type="file" id="cv-file-input" accept=".pdf" style="display: none;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="apply-letter">Carta de Presentación (Requisito de Pasantía)</label>
+                    <textarea id="apply-letter" rows="4" placeholder="Cuéntale brevemente a la empresa por qué eres el estudiante idóneo de la UG para ocupar esta vacante..."></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary-outline" id="cancel-apply-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Confirmar Postulación <i data-lucide="send"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sistema de Notificaciones Flotantes (Toasts) -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Pie de página (Footer) -->
+    <footer class="main-footer" id="main-footer" style="display: none;">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">UG</span>
+                    <span class="logo-text">UG <span class="highlight">Empleo</span></span>
+                </a>
+                <p>La plataforma interactiva de vinculación con la colectividad oficial de la Universidad de Guayaquil. Impulsando el futuro laboral del Ecuador.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" class="social-icon"><i data-lucide="facebook"></i></a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon"><i data-lucide="twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon"><i data-lucide="instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="social-icon"><i data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links-grid">
+                <div class="footer-col">
+                    <h4>Para Estudiantes</h4>
+                    <ul>
+                        <li><a href="empleos.html" class="footer-nav-link" data-target="jobs-view">Buscador de Empleo</a></li>
+                        <li><a href="perfil.html" class="footer-nav-link" data-target="profile-view">Mi Cuenta / Perfil</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Para Empleadores</h4>
+                    <ul>
+                        <li><a href="empresa.html" class="footer-nav-link" data-target="employer-view">Crear Vacantes</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Universidad de Guayaquil. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts por Capas (MVC) -->
+    <script src="js/initial_data.js"></script>
+    <script src="js/models/UGEmpleoModel.js"></script>
+    <script src="js/views/HeaderFooterView.js"></script>
+    <script src="js/views/EmpleosView.js"></script>
+    <script src="js/controllers/EmpleosController.js"></script>
+    <script src="js/pages/empleos_app.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal de Acceso - Bolsa de Empleo UG (Universidad de Guayaquil).">
+    <title>Iniciar Sesión | Bolsa de Empleo UG</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header y Footer fantasma para compatibilidad con HeaderFooterView -->
+    <header class="main-header" id="main-header" style="display: none;"></header>
+    <div class="mobile-nav" id="mobile-nav-panel" style="display: none;"></div>
+
+    <main class="main-content">
+        <!-- ========================================================== -->
+        <!-- PORTAL DE AUTENTICACIÓN (LOGIN Y REGISTRO) -->
+        <!-- ========================================================== -->
+        <section id="auth-view" class="view-section active">
+            <div class="auth-wrapper">
+                <div class="auth-card">
+                    <div class="auth-logo-header">
+                        <div class="logo-icon-lg">UG</div>
+                        <h2>Bolsa de Empleo UG</h2>
+                        <p class="auth-slogan">"La más grande, importante y gloriosa del Ecuador"</p>
+                    </div>
+                    
+                    <!-- Pestañas Auth -->
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" id="tab-login">Iniciar Sesión</button>
+                        <button class="auth-tab" id="tab-register">Registrarse</button>
+                    </div>
+ 
+                    <!-- Formulario Iniciar Sesión -->
+                    <form id="login-form" class="auth-form active">
+                        <div class="form-group">
+                            <label for="login-email" class="required">Correo Institucional o Corporativo</label>
+                            <div class="input-icon-wrapper">
+                                <i data-lucide="mail" class="field-icon"></i>
+                                <input type="email" id="login-email" placeholder="ejemplo@ug.edu.ec o reclutador@reclutadores.com" required autocomplete="email">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="login-password" class="required">Contraseña</label>
+                            <div class="input-icon-wrapper">
+                                <i data-lucide="lock" class="field-icon"></i>
+                                <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="required">Selecciona tu Rol Académico/Empresarial:</label>
+                            <div class="role-selector-wrapper">
+                                <label class="role-option">
+                                    <input type="radio" name="login-role" value="estudiante" checked>
+                                    <span class="role-box">
+                                        <i data-lucide="graduation-cap"></i>
+                                        <span>Estudiante UG</span>
+                                    </span>
+                                </label>
+                                <label class="role-option">
+                                    <input type="radio" name="login-role" value="empresa">
+                                    <span class="role-box">
+                                        <i data-lucide="building-2"></i>
+                                        <span>Empresa</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Ingresar al Sistema <i data-lucide="log-in"></i></button>
+
+                        <div class="auth-demo-accounts">
+                            <p class="demo-title"><i data-lucide="info"></i> Credenciales de demostración rápida:</p>
+                            <div class="demo-row">
+                                <span>🎓 <strong>Estudiante:</strong> jordycamacho@ug.edu.ec</span>
+                                <span>🔑 123456</span>
+                            </div>
+                            <div class="demo-row">
+                                <span>🏢 <strong>Empresa:</strong> reclutador@reclutadores.com</span>
+                                <span>🔑 123456</span>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Formulario Registro -->
+                    <form id="register-form" class="auth-form">
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="reg-name" class="required">Nombre Completo o Razón Social</label>
+                                <div class="input-icon-wrapper">
+                                    <i data-lucide="user" class="field-icon"></i>
+                                    <input type="text" id="reg-name" placeholder="Ej: Jordy Camacho o Telconet Latam" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="reg-email" class="required">Correo Electrónico</label>
+                                <div class="input-icon-wrapper">
+                                    <i data-lucide="mail" class="field-icon"></i>
+                                    <input type="email" id="reg-email" placeholder="ejemplo@ug.edu.ec" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reg-password" class="required">Contraseña</label>
+                                <div class="input-icon-wrapper">
+                                    <i data-lucide="lock" class="field-icon"></i>
+                                    <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres" required minlength="6">
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label class="required">Tipo de Perfil (Rol):</label>
+                                <div class="role-selector-wrapper">
+                                    <label class="role-option">
+                                        <input type="radio" name="reg-role" value="estudiante" checked>
+                                        <span class="role-box">
+                                            <i data-lucide="graduation-cap"></i>
+                                            <span>Estudiante UG</span>
+                                        </span>
+                                    </label>
+                                    <label class="role-option">
+                                        <input type="radio" name="reg-role" value="empresa">
+                                        <span class="role-box">
+                                            <i data-lucide="building-2"></i>
+                                            <span>Empresa</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 16px;">Registrar Cuenta <i data-lucide="user-plus"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer" id="main-footer" style="display: none;"></footer>
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts por Capas (MVC) -->
+    <script src="js/initial_data.js"></script>
+    <script src="js/models/UGEmpleoModel.js"></script>
+    <script src="js/views/HeaderFooterView.js"></script>
+    <script src="js/views/AuthView.js"></script>
+    <script src="js/controllers/AuthController.js"></script>
+    <script src="js/pages/auth_app.js"></script>
+</body>
+</html>
