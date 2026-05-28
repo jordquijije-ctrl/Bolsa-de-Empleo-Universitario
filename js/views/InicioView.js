@@ -39,4 +39,15 @@ class InicioView {
             });
         });
     }
+
+    renderCategoryCounts(counts) {
+        this.categoryCards.forEach(card => {
+            const category = card.getAttribute("data-category");
+            const count = counts[category] || 0;
+            const countSpan = card.querySelector(".category-count");
+            if (countSpan) {
+                countSpan.textContent = `${count} ${count === 1 ? 'vacante' : 'vacantes'}`;
+            }
+        });
+    }
 }

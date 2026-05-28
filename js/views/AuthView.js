@@ -51,7 +51,20 @@ class AuthView {
                 const email = document.getElementById("reg-email").value;
                 const password = document.getElementById("reg-password").value;
                 const role = document.querySelector('input[name="reg-role"]:checked').value;
-                handler({ name, email, password, role });
+                
+                const avatarFileEl = document.getElementById("reg-avatar");
+                const file = avatarFileEl && avatarFileEl.files ? avatarFileEl.files[0] : null;
+
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const avatarBase64 = event.target.result;
+                        handler({ name, email, password, role, avatarBase64 });
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    handler({ name, email, password, role, avatarBase64: null });
+                }
             });
         }
     }

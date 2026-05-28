@@ -22,7 +22,28 @@ class InicioController {
         this.shellView.render(this.model.currentUser);
         this.shellView.bindLogout(() => this.logout());
 
+        // Calcular y renderizar contadores de vacantes por categoría
+        this.renderCategoryCounts();
+
         this.bindEvents();
+    }
+
+    renderCategoryCounts() {
+        const jobs = this.model.readJobs();
+        const counts = {
+            "Tecnología": 0,
+            "Diseño": 0,
+            "Administración": 0,
+            "Ingeniería": 0
+        };
+
+        jobs.forEach(job => {
+            if (counts[job.category] !== undefined) {
+                counts[job.category]++;
+            }
+        });
+
+        this.view.renderCategoryCounts(counts);
     }
 
     bindEvents() {

@@ -5,13 +5,27 @@
 
 class UGEmpleoModel {
     constructor() {
+        // Limpieza de cuentas adicionales: Mantener solo Jordy Camacho (id: 1) y UgTrabajos (id: 2)
+        if (localStorage.getItem("ug_users")) {
+            try {
+                let existingUsers = JSON.parse(localStorage.getItem("ug_users"));
+                let initialCount = existingUsers.length;
+                existingUsers = existingUsers.filter(u => u.id === 1 || u.id === 2);
+                if (existingUsers.length !== initialCount) {
+                    localStorage.setItem("ug_users", JSON.stringify(existingUsers));
+                }
+            } catch (e) {
+                console.error("Error al limpiar usuarios extras:", e);
+            }
+        }
+
         // Migración de datos anteriores en localStorage para asegurar consistencia inmediata
         if (localStorage.getItem("ug_users")) {
             try {
                 let existingUsers = JSON.parse(localStorage.getItem("ug_users"));
                 let migrated = false;
                 existingUsers = existingUsers.map(u => {
-                    if (u.role === "estudiante" && (u.avatar !== "img/jordy_camacho.jpg" || u.name !== "Jordy Camacho" || u.email !== "jordycamacho@ug.edu.ec")) {
+                    if (u.role === "estudiante" && u.id === 1 && (u.avatar !== "img/jordy_camacho.jpg" || u.name !== "Jordy Camacho" || u.email !== "jordycamacho@ug.edu.ec")) {
                         migrated = true;
                         return {
                             ...u,
@@ -36,7 +50,7 @@ class UGEmpleoModel {
                     const sessionUserStr = sessionStorage.getItem("ug_session_user");
                     if (sessionUserStr) {
                         const sessionUser = JSON.parse(sessionUserStr);
-                        if (sessionUser.role === "estudiante" && (sessionUser.avatar !== "img/jordy_camacho.jpg" || sessionUser.name !== "Jordy Camacho" || sessionUser.email !== "jordycamacho@ug.edu.ec")) {
+                        if (sessionUser.role === "estudiante" && sessionUser.id === 1 && (sessionUser.avatar !== "img/jordy_camacho.jpg" || sessionUser.name !== "Jordy Camacho" || sessionUser.email !== "jordycamacho@ug.edu.ec")) {
                             sessionUser.name = "Jordy Camacho";
                             sessionUser.email = "jordycamacho@ug.edu.ec";
                             sessionUser.avatar = "img/jordy_camacho.jpg";
@@ -117,7 +131,7 @@ class UGEmpleoModel {
         return null;
     }
 
-    registerUser(name, email, password, role) {
+    registerUser(name, email, password, role, avatarBase64 = null) {
         // Validar si el correo institucional ya existe
         if (this.users.some(u => u.email.toLowerCase() === email.toLowerCase().trim())) {
             return { success: false, message: "El correo ya está registrado en la base de la UG." };
@@ -129,14 +143,18 @@ class UGEmpleoModel {
             email: email.toLowerCase().trim(),
             password,
             role,
-            avatar: role === "estudiante" 
+            avatar: avatarBase64 || (role === "estudiante" 
                 ? "img/jordy_camacho.jpg"
-                : "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=100",
+                : "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=100"),
             degreeOrCompany: role === "estudiante" ? "Ingeniería en Sistemas de Información" : name,
             facultyOrBrand: role === "estudiante" ? "Facultad de Ciencias Matemáticas y Físicas" : "Empresa Aliada UG",
             bio: role === "estudiante" 
                 ? "Estudiante activo listo para aplicar mis conocimientos académicos en el sector corporativo."
-                : `Empresa debidamente acreditada para vinculación laboral con la Universidad de Guayaquil.`
+                : `Empresa debidamente acreditada para vinculación laboral con la Universidad de Guayaquil.`,
+            phone: role === "estudiante" ? "+593 98 765 4321" : "",
+            location: role === "estudiante" ? "Guayaquil, Ecuador" : "",
+            cvFile: role === "estudiante" ? "Jordy_Camacho_CV_UG.pdf" : "",
+            skills: role === "estudiante" ? "HTML5 & CSS3, JavaScript (ES6), React.js, Bases de Datos, Trabajo en Equipo, Inglés B2" : ""
         };
 
         // Guardar en array y persistir en localStorage (C de CRUD de usuarios)
@@ -249,6 +267,24 @@ class UGEmpleoModel {
             return app;
         }
         return null;
+    }
+
+    updateStudentProfile(userId, updatedFields) {
+        const index = this.users.findIndex(u => u.id === userId);
+        if (index === -1) return null;
+
+        this.users[index] = {
+            ...this.users[index],
+            ...updatedFields
+        };
+
+        if (this.currentUser && this.currentUser.id === userId) {
+            this.currentUser = this.users[index];
+            sessionStorage.setItem("ug_session_user", JSON.stringify(this.currentUser));
+        }
+
+        this.saveToStorage("users");
+        return this.users[index];
     }
 
     // Auxiliar de Fecha

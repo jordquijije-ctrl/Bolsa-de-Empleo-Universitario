@@ -13,12 +13,61 @@ class PerfilView {
         this.profileCvRow = document.getElementById("profile-cv-row");
         this.profileSkillsBlock = document.getElementById("profile-skills-block");
 
+        this.profileCardPhone = document.getElementById("profile-card-phone");
+        this.profileCardLocation = document.getElementById("profile-card-location");
+        this.profileCardCv = document.getElementById("profile-card-cv");
+        this.profileCardSkills = document.getElementById("profile-card-skills");
+
+        // Elementos del Modal de Edición de Perfil
+        this.editProfileBtn = document.getElementById("edit-profile-btn");
+        this.editProfileModal = document.getElementById("edit-profile-modal");
+        this.closeEditProfileModal = document.getElementById("close-edit-profile-modal");
+        this.cancelEditProfileBtn = document.getElementById("cancel-edit-profile-btn");
+        this.editProfileForm = document.getElementById("edit-profile-form");
+        this.editProfileName = document.getElementById("edit-profile-name");
+        this.editProfileDegree = document.getElementById("edit-profile-degree");
+        this.editProfileFaculty = document.getElementById("edit-profile-faculty");
+        this.editProfilePhone = document.getElementById("edit-profile-phone");
+        this.editProfileLocation = document.getElementById("edit-profile-location");
+        this.editProfileCv = document.getElementById("edit-profile-cv");
+        this.editProfileSkills = document.getElementById("edit-profile-skills");
+        this.editProfileBio = document.getElementById("edit-profile-bio");
+        this.editProfileAvatarFile = document.getElementById("edit-profile-avatar-file");
+        this.editProfileAvatarPreview = document.getElementById("edit-profile-avatar-preview");
+
         this.studentApplicationsList = document.getElementById("student-applications-list");
         this.profileApplicationsCount = document.getElementById("profile-applications-count");
+
+        this.currentUserData = null;
+
+        this.initEditProfileEvents();
+    }
+
+    initEditProfileEvents() {
+        if (this.closeEditProfileModal) {
+            this.closeEditProfileModal.addEventListener("click", () => this.editProfileModal.classList.remove("open"));
+        }
+        if (this.cancelEditProfileBtn) {
+            this.cancelEditProfileBtn.addEventListener("click", () => this.editProfileModal.classList.remove("open"));
+        }
+        if (this.editProfileAvatarFile && this.editProfileAvatarPreview) {
+            this.editProfileAvatarFile.addEventListener("change", (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        this.editProfileAvatarPreview.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
     }
 
     render(user, applications, allJobs, onWithdraw) {
         if (!user) return;
+
+        this.currentUserData = user;
 
         // Render card fields
         if (this.profileAvatarImg) this.profileAvatarImg.src = user.avatar;
@@ -28,13 +77,25 @@ class PerfilView {
         if (this.profileCardBio) this.profileCardBio.innerHTML = `<p>${user.bio}</p>`;
         if (this.profileCardEmail) this.profileCardEmail.textContent = user.email;
 
+        if (this.profileCardPhone) this.profileCardPhone.textContent = user.phone || "+593 98 765 4321";
+        if (this.profileCardLocation) this.profileCardLocation.textContent = user.location || "Guayaquil, Ecuador";
+        if (this.profileCardCv) this.profileCardCv.textContent = user.cvFile || "Jordy_Camacho_CV_UG.pdf";
+
+        if (this.profileCardSkills) {
+            const skillsStr = user.skills || "HTML5 & CSS3, JavaScript (ES6), React.js, Bases de Datos, Trabajo en Equipo, Inglés B2";
+            const skillsArr = skillsStr.split(",").map(s => s.trim()).filter(s => s.length > 0);
+            this.profileCardSkills.innerHTML = skillsArr.map(s => `<span class="skill-tag">${s}</span>`).join("");
+        }
+
         // Hide CV/Skills if user is an employer (safety fallback)
         if (user.role === "empresa") {
             if (this.profileCvRow) this.profileCvRow.style.display = "none";
             if (this.profileSkillsBlock) this.profileSkillsBlock.style.display = "none";
+            if (this.editProfileBtn) this.editProfileBtn.style.display = "none";
         } else {
             if (this.profileCvRow) this.profileCvRow.style.display = "flex";
             if (this.profileSkillsBlock) this.profileSkillsBlock.style.display = "block";
+            if (this.editProfileBtn) this.editProfileBtn.style.display = "flex";
         }
 
         // Render applications count
@@ -120,5 +181,54 @@ class PerfilView {
         });
 
         lucide.createIcons();
+    }
+
+    bindEditProfileSubmit(handler) {
+        if (this.editProfileBtn) {
+            this.editProfileBtn.addEventListener("click", () => {
+                // Rellenar formulario con los datos actuales cargados en la sesión
+                if (this.currentUserData) {
+                    const u = this.currentUserData;
+                    if (this.editProfileName) this.editProfileName.value = u.name || "";
+                    if (this.editProfileDegree) this.editProfileDegree.value = u.degreeOrCompany || "";
+                    if (this.editProfileFaculty) this.editProfileFaculty.value = u.facultyOrBrand || "";
+                    if (this.editProfilePhone) this.editProfilePhone.value = u.phone || "+593 98 765 4321";
+                    if (this.editProfileLocation) this.editProfileLocation.value = u.location || "Guayaquil, Ecuador";
+                    if (this.editProfileCv) this.editProfileCv.value = u.cvFile || "Jordy_Camacho_CV_UG.pdf";
+                    if (this.editProfileSkills) this.editProfileSkills.value = u.skills || "HTML5 & CSS3, JavaScript (ES6), React.js, Bases de Datos, Trabajo en Equipo, Inglés B2";
+                    if (this.editProfileBio) this.editProfileBio.value = u.bio || "";
+                    if (this.editProfileAvatarPreview) this.editProfileAvatarPreview.src = u.avatar || "";
+                }
+                this.editProfileModal.classList.add("open");
+            });
+        }
+
+        if (this.editProfileForm) {
+            this.editProfileForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const name = this.editProfileName.value;
+                const degreeOrCompany = this.editProfileDegree.value;
+                const facultyOrBrand = this.editProfileFaculty.value;
+                const phone = this.editProfilePhone.value;
+                const location = this.editProfileLocation.value;
+                const cvFile = this.editProfileCv.value;
+                const skills = this.editProfileSkills.value;
+                const bio = this.editProfileBio.value;
+                const avatarFile = this.editProfileAvatarFile.files[0];
+
+                if (avatarFile) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const avatarBase64 = event.target.result;
+                        handler({ name, degreeOrCompany, facultyOrBrand, phone, location, cvFile, skills, bio, avatar: avatarBase64 });
+                        this.editProfileModal.classList.remove("open");
+                    };
+                    reader.readAsDataURL(avatarFile);
+                } else {
+                    handler({ name, degreeOrCompany, facultyOrBrand, phone, location, cvFile, skills, bio });
+                    this.editProfileModal.classList.remove("open");
+                }
+            });
+        }
     }
 }

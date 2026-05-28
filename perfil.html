@@ -79,6 +79,8 @@
                         <p class="profile-univ"><i data-lucide="graduation-cap"></i> Universidad de Guayaquil</p>
                         <span class="semestre-badge" id="profile-card-sub">Cargando...</span>
                         
+                        <button class="btn btn-secondary-outline btn-block" id="edit-profile-btn" style="margin-top: 5px; margin-bottom: 15px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%;"><i data-lucide="edit" style="width: 14px; height: 14px;"></i> Editar Perfil</button>
+                        
                         <div class="profile-bio" id="profile-card-bio">
                             <p>Cargando información del estudiante...</p>
                         </div>
@@ -92,21 +94,21 @@
                             </div>
                             <div class="detail-item">
                                 <i data-lucide="phone"></i>
-                                <span>+593 98 765 4321</span>
+                                <span id="profile-card-phone">+593 98 765 4321</span>
                             </div>
                             <div class="detail-item">
                                 <i data-lucide="map-pin"></i>
-                                <span>Guayaquil, Ecuador</span>
+                                <span id="profile-card-location">Guayaquil, Ecuador</span>
                             </div>
                             <div class="detail-item" id="profile-cv-row">
                                 <i data-lucide="file-text"></i>
-                                <span class="cv-text">Jordy_Camacho_CV_UG.pdf</span>
+                                <span class="cv-text" id="profile-card-cv">Jordy_Camacho_CV_UG.pdf</span>
                             </div>
                         </div>
 
                         <div class="profile-skills" id="profile-skills-block">
                             <h3>Habilidades Clave</h3>
-                            <div class="skills-tags">
+                            <div class="skills-tags" id="profile-card-skills">
                                 <span class="skill-tag">HTML5 & CSS3</span>
                                 <span class="skill-tag">JavaScript (ES6)</span>
                                 <span class="skill-tag">React.js</span>
@@ -137,6 +139,61 @@
             </div>
         </section>
     </main>
+
+    <!-- Modal para Editar Perfil del Estudiante -->
+    <div class="modal-overlay" id="edit-profile-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3><i data-lucide="user-cog"></i> Editar Perfil Profesional</h3>
+                <button class="close-modal-btn" id="close-edit-profile-modal"><i data-lucide="x"></i></button>
+            </div>
+            <form id="edit-profile-form" class="modal-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="edit-profile-name" class="required">Nombre Completo</label>
+                        <input type="text" id="edit-profile-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-profile-degree" class="required">Carrera / Título</label>
+                        <input type="text" id="edit-profile-degree" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-profile-faculty" class="required">Facultad / Unidad</label>
+                        <input type="text" id="edit-profile-faculty" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-profile-phone">Teléfono de Contacto</label>
+                        <input type="text" id="edit-profile-phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-profile-location">Ubicación (Ciudad, País)</label>
+                        <input type="text" id="edit-profile-location">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-profile-cv">Nombre de Archivo CV (PDF)</label>
+                        <input type="text" id="edit-profile-cv">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="edit-profile-skills">Habilidades Clave (Separadas por comas)</label>
+                        <input type="text" id="edit-profile-skills" placeholder="Ej: HTML5 & CSS3, JavaScript (ES6), React.js, Bases de Datos">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="edit-profile-bio" class="required">Extracto Profesional (Bio)</label>
+                        <textarea id="edit-profile-bio" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="edit-profile-avatar-file">Foto de Perfil (Avatar)</label>
+                        <input type="file" id="edit-profile-avatar-file" accept="image/*">
+                        <img id="edit-profile-avatar-preview" src="" alt="Vista previa avatar" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; margin: 10px auto 0; display: block; border: 2px solid var(--border-color);">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary-outline" id="cancel-edit-profile-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Sistema de Notificaciones Flotantes (Toasts) -->
     <div class="toast-container" id="toast-container"></div>

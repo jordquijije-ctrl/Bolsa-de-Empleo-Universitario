@@ -28,6 +28,7 @@ class PerfilController {
         // Renderizar cabecera y pie compartidos
         this.shellView.render(this.model.currentUser);
         this.shellView.bindLogout(() => this.logout());
+        this.view.bindEditProfileSubmit((formData) => this.handleEditProfile(formData));
 
         this.refreshProfileDashboard();
     }
@@ -54,6 +55,17 @@ class PerfilController {
             this.model.deleteApplication(appId);
             this.shellView.showToast("Postulación Retirada", `Has cancelado tu postulación para '${job.title}' en ${job.company}.`, "danger");
             this.refreshProfileDashboard();
+        }
+    }
+
+    handleEditProfile(formData) {
+        const updated = this.model.updateStudentProfile(this.model.currentUser.id, formData);
+        if (updated) {
+            this.shellView.showToast("Perfil Actualizado", "Los cambios en tu perfil profesional fueron guardados con éxito.", "success");
+            this.shellView.render(this.model.currentUser);
+            this.refreshProfileDashboard();
+        } else {
+            this.shellView.showToast("Error", "No se pudo actualizar el perfil.", "danger");
         }
     }
 
