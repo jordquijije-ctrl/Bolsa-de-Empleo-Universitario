@@ -35,6 +35,8 @@ class PerfilView {
         this.editProfileAvatarFile = document.getElementById("edit-profile-avatar-file");
         this.editProfileAvatarPreview = document.getElementById("edit-profile-avatar-preview");
 
+        this.profileAlertsContainer = document.getElementById("profile-alerts-container");
+
         this.studentApplicationsList = document.getElementById("student-applications-list");
         this.profileApplicationsCount = document.getElementById("profile-applications-count");
 
@@ -85,6 +87,53 @@ class PerfilView {
             const skillsStr = user.skills || "HTML5 & CSS3, JavaScript (ES6), React.js, Bases de Datos, Trabajo en Equipo, Inglés B2";
             const skillsArr = skillsStr.split(",").map(s => s.trim()).filter(s => s.length > 0);
             this.profileCardSkills.innerHTML = skillsArr.map(s => `<span class="skill-tag">${s}</span>`).join("");
+        }
+
+        // Renderizar banners de alerta dinámicos si el perfil del estudiante está incompleto
+        if (this.profileAlertsContainer) {
+            this.profileAlertsContainer.innerHTML = "";
+            if (user.role === "estudiante") {
+                let alertHtml = "";
+                
+                // Alerta 1: Información de contacto incompleta (teléfono o ubicación vacíos)
+                const isContactIncomplete = !user.phone || !user.location || user.phone === "" || user.location === "";
+                if (isContactIncomplete) {
+                    alertHtml += `
+                        <div class="profile-alert-banner alert-warning" style="background: var(--warning-soft); border: 1px solid rgba(245, 158, 11, 0.2); border-left: 4px solid var(--warning); padding: 16px; border-radius: var(--radius-md); margin-bottom: 20px; display: flex; gap: 14px; align-items: flex-start; text-align: left;">
+                            <div class="alert-icon" style="color: var(--warning); font-size: 1.25rem;"><i data-lucide="alert-triangle" style="width: 20px; height: 20px;"></i></div>
+                            <div class="alert-content" style="flex: 1;">
+                                <h4 style="font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">Información Necesaria Pendiente</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 10px;">Tu perfil aún no cuenta con información de contacto completa (teléfono o ubicación). Para poder postular a las vacantes académicas, las empresas de la UG necesitan estos datos para contactarte directamente.</p>
+                                <button class="btn btn-secondary-outline trigger-edit-profile-alert" style="padding: 4px 10px; font-size: 0.75rem; border-color: rgba(245, 158, 11, 0.4); color: var(--warning); background: transparent;">Completar Información de Contacto <i data-lucide="arrow-right" style="width:12px; display:inline-block; vertical-align:middle;"></i></button>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Alerta 2: CV o habilidades técnicas incompletas
+                const isCvOrSkillsIncomplete = !user.cvFile || !user.skills || user.cvFile === "" || user.skills === "";
+                if (isCvOrSkillsIncomplete) {
+                    alertHtml += `
+                        <div class="profile-alert-banner alert-info" style="background: var(--secondary-glow); border: 1px solid rgba(0, 102, 153, 0.2); border-left: 4px solid var(--secondary); padding: 16px; border-radius: var(--radius-md); margin-bottom: 20px; display: flex; gap: 14px; align-items: flex-start; text-align: left;">
+                            <div class="alert-icon" style="color: var(--secondary); font-size: 1.25rem;"><i data-lucide="info" style="width: 20px; height: 20px;"></i></div>
+                            <div class="alert-content" style="flex: 1;">
+                                <h4 style="font-family: var(--font-heading); font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">¡Actualiza tu CV y Habilidades Técnicas!</h4>
+                                <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; margin-bottom: 10px;">Sube tu hoja de vida oficial de la UG y detalla tus lenguajes de programación, herramientas o tecnologías (React, Node.js, Python, bases de datos). Un perfil profesional enriquecido incrementa exponencialmente tus posibilidades de selección.</p>
+                                <button class="btn btn-secondary-outline trigger-edit-profile-alert" style="padding: 4px 10px; font-size: 0.75rem; border-color: rgba(0, 102, 153, 0.4); color: var(--secondary); background: transparent;">Actualizar CV y Habilidades <i data-lucide="arrow-right" style="width:12px; display:inline-block; vertical-align:middle;"></i></button>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                this.profileAlertsContainer.innerHTML = alertHtml;
+
+                // Vincular clics de los botones de los banners para abrir la modal de edición
+                this.profileAlertsContainer.querySelectorAll(".trigger-edit-profile-alert").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        if (this.editProfileBtn) this.editProfileBtn.click();
+                    });
+                });
+            }
         }
 
         // Hide CV/Skills if user is an employer (safety fallback)

@@ -5,20 +5,6 @@
 
 class UGEmpleoModel {
     constructor() {
-        // Limpieza de cuentas adicionales: Mantener solo Jordy Camacho (id: 1) y UgTrabajos (id: 2)
-        if (localStorage.getItem("ug_users")) {
-            try {
-                let existingUsers = JSON.parse(localStorage.getItem("ug_users"));
-                let initialCount = existingUsers.length;
-                existingUsers = existingUsers.filter(u => u.id === 1 || u.id === 2);
-                if (existingUsers.length !== initialCount) {
-                    localStorage.setItem("ug_users", JSON.stringify(existingUsers));
-                }
-            } catch (e) {
-                console.error("Error al limpiar usuarios extras:", e);
-            }
-        }
-
         // Migración de datos anteriores en localStorage para asegurar consistencia inmediata
         if (localStorage.getItem("ug_users")) {
             try {
@@ -131,7 +117,7 @@ class UGEmpleoModel {
         return null;
     }
 
-    registerUser(name, email, password, role, avatarBase64 = null) {
+    registerUser(name, email, password, role, avatarBase64 = null, phone = "", province = "", city = "") {
         // Validar si el correo institucional ya existe
         if (this.users.some(u => u.email.toLowerCase() === email.toLowerCase().trim())) {
             return { success: false, message: "El correo ya está registrado en la base de la UG." };
@@ -149,12 +135,14 @@ class UGEmpleoModel {
             degreeOrCompany: role === "estudiante" ? "Ingeniería en Sistemas de Información" : name,
             facultyOrBrand: role === "estudiante" ? "Facultad de Ciencias Matemáticas y Físicas" : "Empresa Aliada UG",
             bio: role === "estudiante" 
-                ? "Estudiante activo listo para aplicar mis conocimientos académicos en el sector corporativo."
+                ? "Estudiante activo listo para aplicar mis conocimientos académicos en el sector corporativo. (Por favor, actualiza tu perfil para personalizar esta información)."
                 : `Empresa debidamente acreditada para vinculación laboral con la Universidad de Guayaquil.`,
-            phone: role === "estudiante" ? "+593 98 765 4321" : "",
-            location: role === "estudiante" ? "Guayaquil, Ecuador" : "",
-            cvFile: role === "estudiante" ? "Jordy_Camacho_CV_UG.pdf" : "",
-            skills: role === "estudiante" ? "HTML5 & CSS3, JavaScript (ES6), React.js, Bases de Datos, Trabajo en Equipo, Inglés B2" : ""
+            phone: role === "estudiante" ? (phone || "+593 98 765 4321") : phone,
+            location: role === "estudiante" 
+                ? (city && province ? `${city}, ${province}` : "Guayaquil, Ecuador") 
+                : (city && province ? `${city}, ${province}` : ""),
+            cvFile: role === "estudiante" ? "" : "", // New registered user starts with no CV file to trigger alert
+            skills: role === "estudiante" ? "" : ""  // New registered user starts with no skills to trigger alert
         };
 
         // Guardar en array y persistir en localStorage (C de CRUD de usuarios)

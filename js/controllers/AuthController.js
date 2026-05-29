@@ -40,7 +40,16 @@ class AuthController {
         });
 
         this.view.bindRegisterSubmit((data) => {
-            const result = this.model.registerUser(data.name, data.email, data.password, data.role, data.avatarBase64);
+            const result = this.model.registerUser(
+                data.name, 
+                data.email, 
+                data.password, 
+                data.role, 
+                data.avatarBase64,
+                data.phone,
+                data.province,
+                data.city
+            );
             if (result.success) {
                 // Alerta de confirmación de registro (Requisito de Mensajes de confirmación/alertas)
                 alert(`¡Cuenta creada con éxito!\n\nUsuario: ${data.name}\nCorreo UG: ${data.email}\nRol: ${data.role.toUpperCase()}\n\nYa puedes iniciar sesión en el portal.`);
