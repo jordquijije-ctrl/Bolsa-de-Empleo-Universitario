@@ -399,7 +399,7 @@ a {
 }
 .mobile-link {
     display: flex;
-    align-items: center;
+        align-items: center;
     gap: 12px;
     padding: 10px 14px;
     border-radius: var(--radius-md);
@@ -449,7 +449,7 @@ a {
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     width: 100%;
-    max-width: 480px;
+    max-width: 550px;
     padding: 40px;
     box-shadow: var(--shadow-lg);
     transition: var(--transition);
@@ -530,6 +530,7 @@ a {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 .field-icon {
     position: absolute;
@@ -1736,6 +1737,7 @@ a {
     color: var(--text-primary);
     font-family: var(--font-body);
     font-size: 0.85rem;
+    width: 100%;
 }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
     border-color: var(--secondary);
